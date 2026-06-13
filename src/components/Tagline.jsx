@@ -149,9 +149,9 @@ export default function Tagline() {
     <section className="bg-white py-24 px-6 text-center overflow-hidden">
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 40 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, x: -70 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <h2
           style={{
@@ -172,9 +172,9 @@ export default function Tagline() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.9, delay: 0.25 }}
+        initial={{ opacity: 0, x: 70 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
         className="mt-16"
       >
         <MacBook />

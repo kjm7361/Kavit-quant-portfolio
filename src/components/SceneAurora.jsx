@@ -101,9 +101,9 @@ export default function SceneAurora() {
       {/* Content */}
       <div ref={ref} className="relative z-10 w-full px-6 py-20">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-center mb-16"
         >
           <p className="font-mono text-xs tracking-widest uppercase mb-3" style={{ color: 'rgba(0,255,160,0.6)' }}>
@@ -126,9 +126,9 @@ export default function SceneAurora() {
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: i * 0.1, duration: 0.6, ease: 'easeOut' }}
               className="text-center p-6 rounded-2xl"
               style={{
                 background: 'rgba(255,255,255,0.04)',

@@ -42,9 +42,9 @@ export default function Quote() {
       <div ref={ref} className="relative z-10 w-full px-8 md:px-20 py-24">
         {/* ROCKY IV stamp */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-10"
         >
           <span
@@ -57,8 +57,8 @@ export default function Quote() {
 
         {/* Giant quote */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, x: -80 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.9, ease: 'easeOut' }}
         >
           <blockquote
@@ -79,9 +79,9 @@ export default function Quote() {
 
         {/* Attribution */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5 }}
+          initial={{ opacity: 0, x: 50 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ delay: 0.4, duration: 0.7, ease: 'easeOut' }}
           className="mt-10 font-sans text-sm tracking-widest uppercase"
           style={{ color: 'rgba(255,255,255,0.3)' }}
         >

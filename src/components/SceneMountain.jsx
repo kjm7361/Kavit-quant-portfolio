@@ -107,18 +107,18 @@ export default function SceneMountain() {
       {/* Text content */}
       <div className="relative z-10 text-center px-8 pb-32">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.7 }}
+          initial={{ opacity: 0, x: 50 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ delay: 0.2, duration: 0.7, ease: 'easeOut' }}
           className="font-mono text-xs tracking-widest uppercase mb-4"
           style={{ color: 'rgba(255,220,150,0.7)' }}
         >
           ✦ &nbsp; Where Mathematics Meets Markets &nbsp; ✦
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.35, duration: 0.9 }}
+          initial={{ opacity: 0, x: -60 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ delay: 0.25, duration: 0.9, ease: 'easeOut' }}
           style={{
             fontFamily: '"Playfair Display", Georgia, serif',
             fontSize: 'clamp(2rem, 5vw, 4.5rem)',

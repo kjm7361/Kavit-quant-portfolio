@@ -75,9 +75,9 @@ export default function SceneOcean() {
       {/* Center text */}
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 30 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.9 }}
+        initial={{ opacity: 0, x: -60 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
         className="relative z-10 text-center px-8 pb-20"
       >
         <p className="font-mono text-xs tracking-widest uppercase mb-5" style={{ color: 'rgba(100,180,255,0.6)' }}>

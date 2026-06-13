@@ -53,18 +53,18 @@ export default function Skills() {
 
       <div ref={ref} className="relative z-10 max-w-4xl mx-auto text-center">
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, x: -40 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           className="font-mono text-xs tracking-widest uppercase mb-3"
           style={{ color: 'rgba(160,120,255,0.7)' }}
         >
           ✦ &nbsp; Core Specialization &nbsp; ✦
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={{ opacity: 0, x: -40 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
           style={{
             fontFamily: '"Playfair Display", Georgia, serif',
             fontSize: 'clamp(2rem, 5vw, 3.5rem)',
@@ -81,9 +81,9 @@ export default function Skills() {
           {skills.map((s, i) => (
             <motion.div
               key={s.name}
-              initial={{ opacity: 0, y: 30, scale: 0.8 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.04 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40, scale: 0.85 }}
+              animate={inView ? { opacity: 1, x: 0, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.05, ease: 'easeOut' }}
               whileHover={{ scale: 1.15, y: -4 }}
               className="flex flex-col items-center gap-3 cursor-default"
             >

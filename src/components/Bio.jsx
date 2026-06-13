@@ -23,9 +23,9 @@ export default function Bio() {
 
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 30 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, x: -60 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
         className="max-w-3xl mx-auto text-center relative z-10"
       >
         <p

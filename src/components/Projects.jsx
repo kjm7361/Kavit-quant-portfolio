@@ -117,13 +117,14 @@ function Card({ p, index, onClick, featured }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
   const [hovered, setHovered] = useState(false)
+  const xDir = featured ? 60 : index % 2 === 0 ? -50 : 50
 
   return (
     <motion.button
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.1 }}
+      initial={{ opacity: 0, x: xDir }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
       whileHover={{ y: -6 }}
       onClick={onClick}
       onHoverStart={() => setHovered(true)}
@@ -248,9 +249,9 @@ export default function Projects() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, x: -60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
             className="relative z-10 max-w-5xl mx-auto"
           >
             <p className="font-mono text-xs tracking-widest uppercase mb-3" style={{ color: 'rgba(160,120,255,0.6)' }}>
