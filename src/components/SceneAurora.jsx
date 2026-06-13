@@ -1,12 +1,32 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 const stats = [
-  { value: '5+', label: 'Projects', sub: 'On GitHub' },
-  { value: '8+', label: 'Trading Strategies', sub: 'Built & backtested' },
-  { value: '500+', label: 'Equity Pairs', sub: 'Analyzed' },
-  { value: '1.84', label: 'Sharpe Ratio', sub: 'Best strategy' },
+  { target: 5,   suffix: '+',  decimals: 0, label: 'Projects',          sub: 'On GitHub' },
+  { target: 8,   suffix: '+',  decimals: 0, label: 'Trading Strategies', sub: 'Built & backtested' },
+  { target: 500, suffix: '+',  decimals: 0, label: 'Equity Pairs',       sub: 'Analyzed' },
+  { target: 1.84,suffix: '',   decimals: 2, label: 'Sharpe Ratio',       sub: 'Best strategy' },
 ]
+
+function CountUp({ target, suffix, decimals, inView }) {
+  const [val, setVal] = useState(0)
+  useEffect(() => {
+    if (!inView) { setVal(0); return }
+    const duration = 1400
+    const start = Date.now()
+    let raf
+    const tick = () => {
+      const t = Math.min((Date.now() - start) / duration, 1)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setVal(+(target * eased).toFixed(decimals))
+      if (t < 1) raf = requestAnimationFrame(tick)
+      else setVal(target)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [inView, target, decimals])
+  return <>{decimals === 0 ? Math.round(val) : val.toFixed(decimals)}{suffix}</>
+}
 
 export default function SceneAurora() {
   const ref = useRef(null)
@@ -146,7 +166,7 @@ export default function SceneAurora() {
                   lineHeight: 1,
                 }}
               >
-                {s.value}
+                <CountUp target={s.target} suffix={s.suffix} decimals={s.decimals} inView={inView} />
               </div>
               <div className="mt-2 text-white/70 text-sm font-sans font-medium">{s.label}</div>
               <div className="mt-0.5 text-white/30 text-xs font-sans">{s.sub}</div>
