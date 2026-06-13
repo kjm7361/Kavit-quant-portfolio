@@ -21,17 +21,11 @@ export default function Navbar() {
 
       {/* Center links */}
       <div className="hidden md:flex items-center gap-8">
-        {['Experience', 'Contact', 'LinkedIn'].map(l => (
-          <a
-            key={l}
-            href={l === 'LinkedIn' ? 'https://linkedin.com/in/kavit-mandalaywala' : `#${l.toLowerCase()}`}
-            target={l === 'LinkedIn' ? '_blank' : undefined}
-            rel={l === 'LinkedIn' ? 'noopener noreferrer' : undefined}
-            className="text-white/80 hover:text-white text-sm font-sans transition-colors"
-          >
-            {l}
-          </a>
-        ))}
+        <a href="#experience" className="text-white/80 hover:text-white text-sm font-sans transition-colors">Experience</a>
+        <a href="#projects" className="text-white/80 hover:text-white text-sm font-sans transition-colors">Projects</a>
+        <a href="#skills" className="text-white/80 hover:text-white text-sm font-sans transition-colors">Skills</a>
+        <a href="mailto:kjm7361@psu.edu" className="text-white/80 hover:text-white text-sm font-sans transition-colors">Contact</a>
+        <a href="https://linkedin.com/in/kavit-mandalaywala" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white text-sm font-sans transition-colors">LinkedIn</a>
       </div>
 
       {/* Buttons */}
