@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::selection { background: rgba(139,92,246,0.3); }
+
+/* ── ticker strip ── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+/* ── aurora wave ── */
+@keyframes aurora1 {
+  0%   { transform: rotate(-8deg) translateX(-8%) scaleY(0.8); opacity: 0.5; }
+  100% { transform: rotate(8deg)  translateX(8%)  scaleY(1.2); opacity: 0.9; }
+}
+@keyframes aurora2 {
+  0%   { transform: rotate(6deg)  translateX(6%)  scaleY(1.1); opacity: 0.7; }
+  100% { transform: rotate(-6deg) translateX(-6%) scaleY(0.7); opacity: 0.4; }
+}
+@keyframes aurora3 {
+  0%   { transform: translateY(-10%) scaleX(1.1); opacity: 0.6; }
+  100% { transform: translateY(10%)  scaleX(0.9); opacity: 0.3; }
+}
+
+/* ── floating stars ── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.4); }
+}
+
+/* ── wave ocean ── */
+@keyframes wave1 {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes wave2 {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ── gentle float ── */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* ── sun pulse ── */
+@keyframes sunPulse {
+  0%, 100% { box-shadow: 0 0 60px 20px rgba(255,180,50,0.4); }
+  50%       { box-shadow: 0 0 100px 40px rgba(255,180,50,0.6); }
+}
