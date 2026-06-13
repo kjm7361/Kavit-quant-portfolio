@@ -10,7 +10,7 @@ export default function Quote() {
       className="relative w-full overflow-hidden flex items-center"
       style={{ minHeight: '100vh' }}
     >
-      {/* Rocky background — bottom portion of the image */}
+      {/* Rocky background */}
       <div
         className="absolute inset-0"
         style={{
@@ -21,7 +21,7 @@ export default function Quote() {
         }}
       />
 
-      {/* Heavy color-grade overlay — gold/amber tint */}
+      {/* Heavy color-grade overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -40,21 +40,6 @@ export default function Quote() {
 
       {/* Content */}
       <div ref={ref} className="relative z-10 w-full px-8 md:px-20 py-24">
-        {/* ROCKY IV stamp */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mb-10"
-        >
-          <span
-            className="font-sans text-xs tracking-[0.35em] uppercase"
-            style={{ color: 'rgba(218,165,32,0.7)' }}
-          >
-            🥊 Rocky IV · 1985
-          </span>
-        </motion.div>
-
         {/* Giant quote */}
         <motion.div
           initial={{ opacity: 0, x: -80 }}

@@ -26,17 +26,6 @@ export default function QuoteJobs() {
       />
 
       <div ref={ref} className="relative z-10 max-w-4xl mx-auto px-8 md:px-16 text-center">
-        {/* Eyebrow */}
-        <motion.p
-          initial={{ opacity: 0, x: -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="font-mono text-xs tracking-[0.3em] uppercase mb-10"
-          style={{ color: 'rgba(255,255,255,0.2)' }}
-        >
-          Steve Jobs · Stanford, 2005
-        </motion.p>
-
         {/* Word-by-word reveal */}
         <blockquote
           style={{
