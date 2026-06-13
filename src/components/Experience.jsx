@@ -208,7 +208,7 @@ function IPhone({ children }) {
 /* ── section ─────────────────────────────────── */
 export default function Experience() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: false, margin: '-80px' })
 
   return (
     <section id="experience" className="relative py-20 px-6 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #000 0%, #030d1a 40%, #040f20 70%, #000 100%)' }}>

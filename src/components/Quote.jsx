@@ -3,7 +3,7 @@ import { useRef } from 'react'
 
 export default function Quote() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: false, margin: '-60px' })
 
   return (
     <section

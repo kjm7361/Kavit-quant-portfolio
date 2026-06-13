@@ -22,7 +22,7 @@ function WaveLayer({ color, opacity, speed, yOffset, delay }) {
 
 export default function SceneOcean() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: false, margin: '-60px' })
 
   return (
     <section

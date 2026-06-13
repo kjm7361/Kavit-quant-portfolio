@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 function Reveal({ children, delay = 0 }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: false, margin: '-80px' })
   return (
     <motion.div
       ref={ref}

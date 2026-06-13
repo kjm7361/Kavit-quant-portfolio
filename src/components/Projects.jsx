@@ -115,7 +115,7 @@ function Modal({ p, onClose }) {
 /* ── project card ────────────────────────────── */
 function Card({ p, index, onClick, featured }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const inView = useInView(ref, { once: false, margin: '-40px' })
   const [hovered, setHovered] = useState(false)
   const xDir = featured ? 60 : index % 2 === 0 ? -50 : 50
 
@@ -219,7 +219,7 @@ function Card({ p, index, onClick, featured }) {
 export default function Projects() {
   const [active, setActive] = useState(null)
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: false, margin: '-60px' })
 
   return (
     <>
