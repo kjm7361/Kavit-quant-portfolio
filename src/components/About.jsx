@@ -20,7 +20,7 @@ function Reveal({ children, delay = 0 }) {
 const facts = [
   ['Degree', 'B.S. Computer Science + B.S. Mathematics'],
   ['School', 'Pennsylvania State University'],
-  ['GPA', '3.72 / 4.0'],
+  ['Class', 'May 2028'],
   ['Location', 'State College, PA'],
   ['Graduation', 'May 2028'],
   ['Focus', 'Quantitative Finance & Algorithmic Trading'],

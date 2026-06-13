@@ -261,9 +261,9 @@ export default function Hero() {
         style={{ background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.08)' }}
       >
         {[
-          ['GPA', '3.72 / 4.0'],
           ['Strategies', '8 Live'],
           ['Backtests', '500+'],
+          ['Projects', '5 on GitHub'],
           ['Languages', 'Python · C++ · R · SQL'],
         ].map(([k, v]) => (
           <div key={k} className="flex items-center gap-2 font-mono text-[10px]">

@@ -2,7 +2,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const stats = [
-  { value: '3.72', label: 'GPA / 4.0', sub: 'Penn State' },
+  { value: '5+', label: 'Projects', sub: 'On GitHub' },
   { value: '8+', label: 'Trading Strategies', sub: 'Built & backtested' },
   { value: '500+', label: 'Equity Pairs', sub: 'Analyzed' },
   { value: '1.84', label: 'Sharpe Ratio', sub: 'Best strategy' },
