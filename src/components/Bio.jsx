@@ -42,8 +42,7 @@ export default function Bio() {
           student at Penn State with hands-on experience across algorithmic
           trading, statistical arbitrage, options pricing, and full-stack
           platform development. Want to excel in solving complex problems at
-          the intersection of mathematics and markets.{' '}
-          <strong>Seeking internship and research opportunities for Summer 2026.</strong>
+          the intersection of mathematics and markets.
         </p>
       </motion.div>
     </section>
