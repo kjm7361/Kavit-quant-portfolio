@@ -5,6 +5,7 @@ import Tagline from './components/Tagline'
 import SceneMountain from './components/SceneMountain'
 import Bio from './components/Bio'
 import Coursework from './components/Coursework'
+import MonteCarloLab from './components/MonteCarloLab'
 import SceneAurora from './components/SceneAurora'
 import Skills from './components/Skills'
 import Experience from './components/Experience'
@@ -48,6 +49,7 @@ export default function App() {
       <SceneMountain />
       <Bio />
       <Coursework />
+      <MonteCarloLab />
       <SceneAurora />
       <Skills />
       <Experience />
