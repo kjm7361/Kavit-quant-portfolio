@@ -8,6 +8,7 @@ import SceneAurora from './components/SceneAurora'
 import Skills from './components/Skills'
 import Experience from './components/Experience'
 import SceneOcean from './components/SceneOcean'
+import QuoteJobs from './components/QuoteJobs'
 import Quote from './components/Quote'
 import Projects from './components/Projects'
 import Footer from './components/Footer'
@@ -49,6 +50,7 @@ export default function App() {
       <Skills />
       <Experience />
       <SceneOcean />
+      <QuoteJobs />
       <Quote />
       <Projects />
       <Footer />
