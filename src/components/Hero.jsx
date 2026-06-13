@@ -6,7 +6,8 @@ import {
 } from 'recharts'
 
 /* ── data generators ─────────────────────────── */
-function genEquity(n = 80) {
+const WINDOW = 60
+function genEquity(n = WINDOW) {
   let v = 100
   return Array.from({ length: n }, (_, i) => {
     v *= 1 + (Math.random() - 0.44) * 0.022
@@ -97,8 +98,23 @@ function CandleChart({ data }) {
 
 /* ── main component ──────────────────────────── */
 export default function Hero() {
-  const equity  = useRef(genEquity()).current
+  const [equity, setEquity] = useState(() => genEquity())
+  const equityRef = useRef(equity)
   const candles = useRef(genCandles()).current
+
+  /* Live-update the equity curve every 600ms */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEquity(prev => {
+        const last = prev[prev.length - 1]
+        const nextV = +(last.v * (1 + (Math.random() - 0.44) * 0.022)).toFixed(2)
+        const next = [...prev.slice(1), { i: last.i + 1, v: nextV }]
+        equityRef.current = next
+        return next
+      })
+    }, 600)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section id="hero" className="relative w-full h-screen bg-black overflow-hidden flex flex-col">
@@ -146,7 +162,7 @@ export default function Hero() {
                 <Area
                   type="monotone" dataKey="v"
                   stroke="#00ff9f" strokeWidth={1.6}
-                  fill="url(#gGrad)" dot={false} isAnimationActive
+                  fill="url(#gGrad)" dot={false} isAnimationActive={false}
                 />
               </AreaChart>
             </ResponsiveContainer>
