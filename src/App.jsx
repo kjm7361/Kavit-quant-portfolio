@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Tagline from './components/Tagline'
 import SceneMountain from './components/SceneMountain'
 import Bio from './components/Bio'
+import MonteCarlo from './components/MonteCarlo'
 import SceneAurora from './components/SceneAurora'
 import Skills from './components/Skills'
 import Experience from './components/Experience'
@@ -46,6 +47,7 @@ export default function App() {
       <Tagline />
       <SceneMountain />
       <Bio />
+      <MonteCarlo />
       <SceneAurora />
       <Skills />
       <Experience />
