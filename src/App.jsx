@@ -13,6 +13,7 @@ import SceneOcean from './components/SceneOcean'
 import QuoteJobs from './components/QuoteJobs'
 import Quote from './components/Quote'
 import Projects from './components/Projects'
+import OffDuty from './components/OffDuty'
 import Footer from './components/Footer'
 
 function ScrollProgress() {
@@ -57,6 +58,7 @@ export default function App() {
       <QuoteJobs />
       <Quote />
       <Projects />
+      <OffDuty />
       <Footer />
     </div>
   )
