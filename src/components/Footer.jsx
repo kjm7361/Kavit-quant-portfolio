@@ -31,9 +31,14 @@ export default function Footer() {
         </div>
 
         <div className="flex items-center gap-5">
-          <a href="mailto:kjm7361@psu.edu" className="text-white/50 hover:text-white text-sm font-sans transition-colors">
-            kjm7361@psu.edu
-          </a>
+          <div className="flex flex-col gap-1 text-right">
+            <a href="mailto:mandalaywalakaveet@gmail.com" className="text-white/50 hover:text-white text-sm font-sans transition-colors">
+              mandalaywalakaveet@gmail.com
+            </a>
+            <a href="tel:+18149969325" className="text-white/50 hover:text-white text-sm font-sans transition-colors">
+              +1 814-996-9325
+            </a>
+          </div>
           <a
             href="https://github.com/kjm7361"
             target="_blank"
