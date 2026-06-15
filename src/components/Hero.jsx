@@ -180,32 +180,10 @@ export default function Hero() {
         {/* Center: name */}
         <div className="flex-1 flex flex-col items-center justify-center text-center px-2 z-10">
           <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
+            transition={{ delay: 0, duration: 0.5, ease: 'easeOut' }}
           >
-            {/* Avatar */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
-              className="mx-auto mb-4"
-              style={{
-                width: 110, height: 110, borderRadius: '50%',
-                padding: 3,
-                background: 'linear-gradient(135deg, #00ff9f, #00d4ff, #a78bfa)',
-                boxShadow: '0 0 40px rgba(0,255,159,0.35), 0 0 80px rgba(0,255,159,0.15)',
-              }}
-            >
-              <div style={{ width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', background: '#000' }}>
-                <img
-                  src="/avatar.png"
-                  alt="Kavit Jay Mandalaywala"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
-                  onError={e => { e.currentTarget.style.display = 'none' }}
-                />
-              </div>
-            </motion.div>
             <div
               style={{
                 fontFamily: '"Playfair Display", Georgia, serif',
