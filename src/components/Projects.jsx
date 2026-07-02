@@ -3,6 +3,19 @@ import { useRef, useState } from 'react'
 
 const projects = [
   {
+    title: 'Microstructure Alpha Engine',
+    subtitle: 'Real-time order book analytics · Alpaca WebSocket',
+    desc: 'Built a real-time microstructure platform streaming live order book data via Alpaca WebSocket, implementing Kyle\'s Lambda, Almgren-Chriss optimal execution, and Order Flow Imbalance signal generation. Estimated price impact via rolling OLS on signed order flow; solved optimal execution trajectory using quadratic optimization, minimizing market impact cost vs. VWAP benchmark. Decomposed bid-ask spreads into information, inventory, and processing components using Glosten-Milgrom approximation; visualized models live in a Bloomberg-style terminal dashboard.',
+    tags: ['Python', 'FastAPI', 'React', 'Alpaca API', 'NumPy', 'WebSocket'],
+    icon: '📡',
+    gradient: 'linear-gradient(135deg, #0a1628 0%, #0d2137 35%, #0a3352 60%, #0e4d6e 100%)',
+    glow: 'rgba(0,200,255,0.35)',
+    accent: '#00c8ff',
+    github: 'https://github.com/kjm7361/microstructure-alpha-engine',
+    featured: true,
+    stat: { label: 'Jun 2026 – Present', value: 'Python' },
+  },
+  {
     title: 'Market Regime Detection & Trading Strategy',
     subtitle: 'Hidden Markov Model · bull & bear classification',
     desc: 'Built a Hidden Markov Model to classify bull and bear market regimes using historical equity return data. Developed regime-based trading strategies and evaluated performance using Sharpe ratio, volatility, and drawdowns. Analyzed state transitions and market behavior to improve portfolio allocation and risk management decisions.',
@@ -12,7 +25,6 @@ const projects = [
     glow: 'rgba(5,150,105,0.4)',
     accent: '#34d399',
     github: 'https://github.com/kjm7361',
-    featured: true,
     stat: { label: 'May 2026', value: 'Python' },
   },
   {
@@ -38,18 +50,6 @@ const projects = [
     accent: '#a78bfa',
     github: 'https://github.com/kjm7361/microstructure-execution-simulator',
     stat: { label: 'Sep 2025', value: 'Python' },
-  },
-  {
-    title: 'Portfolio Risk & Optimization Model',
-    subtitle: 'Modern Portfolio Theory · Monte Carlo simulation',
-    desc: 'Designed a quantitative model to optimize stock portfolios using Modern Portfolio Theory. Applied Monte Carlo simulations to evaluate risk-return tradeoffs under different market conditions. Analyzed portfolio performance using expected return, volatility, Sharpe ratio, and diversification metrics.',
-    tags: ['Python', 'NumPy', 'Pandas', 'SciPy', 'Matplotlib'],
-    icon: '📉',
-    gradient: 'linear-gradient(135deg, #78350f 0%, #92400e 50%, #b45309 100%)',
-    glow: 'rgba(180,83,9,0.45)',
-    accent: '#fcd34d',
-    github: 'https://github.com/kjm7361',
-    stat: { label: 'May 2025', value: 'Python' },
   },
 ]
 

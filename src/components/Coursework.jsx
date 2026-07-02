@@ -1,336 +1,194 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
-/* ── semester config ─────────────────────────── */
-const SEMS  = ['F24', 'S25', 'F25', 'S26', 'F26']
-const SEM_C = { F24:'#6366f1', S25:'#8b5cf6', F25:'#3b82f6', S26:'#00ff9f', F26:'#38bdf8' }
-const SEM_L = { F24:"Fall '24", S25:"Spr '25", F25:"Fall '25", S26:"Spr '26", F26:"Fall '26" }
-
-/* ── core course data ────────────────────────── */
-const SECTIONS = [
+const CARDS = [
   {
-    key: 'CS', label: 'COMPUTER SCIENCE', color: '#60a5fa',
-    courses: [
-      { code:'CMPSC 131', name:'Programming & Computation I',   sem:'F24' },
-      { code:'CMPSC 132', name:'Programming & Computation II',  sem:'S25' },
-      { code:'CMPSC 221', name:'OOP with Web-Based Apps',       sem:'F25' },
-      { code:'CMPSC 360', name:'Discrete Mathematics for CS',   sem:'F25' },
-      { code:'DS 120',    name:'Data Science Scripting',        sem:'F25' },
-      { code:'CMPEN 270', name:'Digital Design',                sem:'S26' },
-      { code:'CMPSC 311', name:'Systems Programming',           sem:'S26' },
-      { code:'CMPEN 331', name:'Computer Organization & Design',sem:'F26' },
-      { code:'CMPSC 461', name:'Programming Language Concepts', sem:'F26' },
-      { code:'CMPSC 465', name:'Data Structures & Algorithms',  sem:'F26' },
-    ],
+    title: 'Mathematics',
+    topics: ['Probability', 'Statistics', 'Numerical Methods', 'Optimization'],
+    icon: '∑',
+    accent: '#a78bfa',
+    glow: 'rgba(167,139,250,0.18)',
+    border: 'rgba(167,139,250,0.25)',
+    gradient: 'linear-gradient(135deg, rgba(76,29,149,0.25) 0%, rgba(109,40,217,0.08) 100%)',
   },
   {
-    key: 'MATH', label: 'MATHEMATICS', color: '#a78bfa',
-    courses: [
-      { code:'MATH 140',  name:'Calculus I',                    sem:'F24' },
-      { code:'MATH 141',  name:'Calculus II',                   sem:'S25' },
-      { code:'MATH 220',  name:'Matrices',                      sem:'S25' },
-      { code:'MATH 230',  name:'Multivariable Calculus',        sem:'F25' },
-      { code:'MATH 312',  name:'Real Analysis',                 sem:'F25' },
-      { code:'STAT 414',  name:'Intro to Probability Theory',   sem:'S26' },
-      { code:'MATH 455',  name:'Numerical Analysis I',          sem:'S26' },
-      { code:'MATH 250',  name:'Ordinary Differential Equations',sem:'F26'},
-      { code:'MATH 415',  name:'Mathematical Statistics',       sem:'F26' },
-    ],
+    title: 'Computer Science',
+    topics: ['Data Structures', 'Systems', 'Algorithms', 'Software Design'],
+    icon: '</>',
+    accent: '#60a5fa',
+    glow: 'rgba(96,165,250,0.18)',
+    border: 'rgba(96,165,250,0.25)',
+    gradient: 'linear-gradient(135deg, rgba(30,58,138,0.25) 0%, rgba(37,99,235,0.08) 100%)',
   },
   {
-    key: 'ECON', label: 'ECONOMICS', color: '#34d399',
-    courses: [
-      { code:'ECON 102',  name:'Microeconomic Analysis',        sem:'F24' },
-      { code:'ECON 104',  name:'Macroeconomic Analysis',        sem:'S26' },
-      { code:'ECON 302',  name:'Intermediate Microeconomics',   sem:'S26' },
-      { code:'ECON 304',  name:'Intermediate Macroeconomics',   sem:'F26' },
-    ],
+    title: 'Markets',
+    topics: ['Trading Strategies', 'Risk', 'Derivatives', 'Market Structure'],
+    icon: '◈',
+    accent: '#34d399',
+    glow: 'rgba(52,211,153,0.18)',
+    border: 'rgba(52,211,153,0.25)',
+    gradient: 'linear-gradient(135deg, rgba(6,78,59,0.25) 0%, rgba(5,150,105,0.08) 100%)',
+  },
+  {
+    title: 'Research',
+    topics: ['Backtesting', 'Simulation', 'Signal Testing', 'Execution Analytics'],
+    icon: '⌬',
+    accent: '#fbbf24',
+    glow: 'rgba(251,191,36,0.18)',
+    border: 'rgba(251,191,36,0.25)',
+    gradient: 'linear-gradient(135deg, rgba(120,53,15,0.25) 0%, rgba(180,83,9,0.08) 100%)',
+  },
+  {
+    title: 'Economics',
+    topics: ['Microeconomics', 'Macroeconomics', 'Market Analysis', 'Price Theory'],
+    icon: '$',
+    accent: '#f97316',
+    glow: 'rgba(249,115,22,0.18)',
+    border: 'rgba(249,115,22,0.25)',
+    gradient: 'linear-gradient(135deg, rgba(124,45,18,0.25) 0%, rgba(194,65,12,0.08) 100%)',
   },
 ]
 
-const TOTAL = SECTIONS.reduce((s, sec) => s + sec.courses.length, 0)
-
-/* ── 5-dot semester timeline ─────────────────── */
-function SemTimeline({ sem, inView, delay }) {
-  return (
-    <div className="flex items-center gap-1">
-      {SEMS.map((s, i) => {
-        const isThis   = s === sem
-        const isActive = s === 'S26'
-        const c        = SEM_C[s]
-        return (
-          <motion.div
-            key={s}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            transition={{ delay: delay + i * 0.04, duration: 0.2, ease: 'backOut' }}
-          >
-            {isThis ? (
-              <motion.div
-                animate={isActive ? { boxShadow: [`0 0 0px ${c}`, `0 0 10px ${c}`, `0 0 0px ${c}`] } : {}}
-                transition={{ duration: 1.8, repeat: Infinity }}
-                style={{ width: 9, height: 9, borderRadius: '50%', background: c,
-                         boxShadow: isActive ? `0 0 8px ${c}` : `0 0 4px ${c}60` }}
-              />
-            ) : (
-              <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-            )}
-          </motion.div>
-        )
-      })}
-    </div>
-  )
-}
-
-/* ── single course row ───────────────────────── */
-function CourseRow({ course, color, rowIndex, inView, sectionDelay }) {
-  const delay = sectionDelay + rowIndex * 0.045
-  const isActive = course.sem === 'S26'
-  const isUpcoming = course.sem === 'F26'
-
+function AcademicCard({ card, index, inView }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -16 }}
-      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-      transition={{ duration: 0.35, delay, ease: 'easeOut' }}
-      className="group flex items-center gap-3 px-4 py-2 rounded-lg"
-      style={{ transition: 'background 0.15s' }}
-      onMouseEnter={e  => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
-      onMouseLeave={e  => e.currentTarget.style.background = 'transparent'}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.55, delay: 0.15 + index * 0.1, ease: 'easeOut' }}
+      className="group relative rounded-2xl p-6 flex flex-col gap-4"
+      style={{
+        background: card.gradient,
+        border: `1px solid ${card.border}`,
+        boxShadow: `0 4px 24px rgba(0,0,0,0.4)`,
+        backdropFilter: 'blur(12px)',
+        transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
+      }}
+      whileHover={{
+        y: -4,
+        boxShadow: `0 16px 48px ${card.glow}, 0 0 0 1px ${card.accent}40`,
+        transition: { duration: 0.2 },
+      }}
     >
-      {/* Row index */}
-      <span className="font-mono text-[9px] w-4 flex-shrink-0 text-right select-none"
-        style={{ color: 'rgba(255,255,255,0.12)' }}>
-        {String(rowIndex + 1).padStart(2, '0')}
-      </span>
-
-      {/* Course code — like a ticker */}
-      <span className="font-mono text-xs font-bold w-24 flex-shrink-0"
-        style={{ color, letterSpacing: '0.05em' }}>
-        {course.code}
-      </span>
-
-      {/* Name */}
-      <span className="font-mono text-[11px] flex-1 truncate"
-        style={{ color: 'rgba(255,255,255,0.38)' }}>
-        {course.name}
-      </span>
-
-      {/* 5-dot timeline */}
-      <div className="flex-shrink-0">
-        <SemTimeline sem={course.sem} inView={inView} delay={delay} />
+      {/* Icon */}
+      <div
+        className="w-11 h-11 rounded-xl flex items-center justify-center font-mono text-lg font-bold flex-shrink-0"
+        style={{
+          background: `${card.glow}`,
+          border: `1px solid ${card.border}`,
+          color: card.accent,
+          boxShadow: `0 0 16px ${card.glow}`,
+        }}
+      >
+        {card.icon}
       </div>
 
-      {/* Semester tag */}
-      <span className="font-mono text-[9px] w-14 text-right flex-shrink-0"
+      {/* Title */}
+      <h3
         style={{
-          color: isActive ? SEM_C['S26'] : isUpcoming ? SEM_C['F26'] : 'rgba(255,255,255,0.2)',
-          fontWeight: isActive ? 700 : 400,
-        }}>
-        {SEM_L[course.sem]}
-      </span>
+          fontFamily: '"Playfair Display", Georgia, serif',
+          fontSize: '1.2rem',
+          fontWeight: 700,
+          color: '#fff',
+          lineHeight: 1.2,
+        }}
+      >
+        {card.title}
+      </h3>
+
+      {/* Topics */}
+      <div className="flex flex-wrap gap-2">
+        {card.topics.map(t => (
+          <span
+            key={t}
+            className="font-mono text-xs px-2.5 py-1 rounded-full"
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: `1px solid ${card.accent}30`,
+              color: 'rgba(255,255,255,0.65)',
+            }}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* Bottom accent line */}
+      <div
+        className="absolute bottom-0 left-6 right-6 h-px rounded-full opacity-0 group-hover:opacity-100"
+        style={{
+          background: `linear-gradient(to right, transparent, ${card.accent}60, transparent)`,
+          transition: 'opacity 0.3s ease',
+        }}
+      />
     </motion.div>
   )
 }
 
-/* ── section block ───────────────────────────── */
-function Section({ sec, sectionIndex, inView }) {
-  const sectionDelay = 0.2 + sectionIndex * 0.08
-
-  return (
-    <div>
-      {/* Section divider header */}
-      <motion.div
-        initial={{ opacity: 0, scaleX: 0 }}
-        animate={inView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-        transition={{ duration: 0.6, delay: sectionDelay, ease: 'easeOut' }}
-        style={{ originX: 0 }}
-        className="flex items-center gap-3 px-4 py-2 mt-2"
-      >
-        <div style={{ height: 1, width: 8, background: sec.color, opacity: 0.6 }} />
-        <span className="font-mono text-[10px] font-bold tracking-[0.2em]"
-          style={{ color: sec.color }}>
-          {sec.label}
-        </span>
-        <div style={{ flex: 1, height: 1, background: `linear-gradient(to right, ${sec.color}40, transparent)` }} />
-        <span className="font-mono text-[9px]" style={{ color: 'rgba(255,255,255,0.2)' }}>
-          {sec.courses.length} POS
-        </span>
-      </motion.div>
-
-      {/* Courses */}
-      {sec.courses.map((c, i) => (
-        <CourseRow
-          key={c.code}
-          course={c}
-          color={sec.color}
-          rowIndex={i}
-          inView={inView}
-          sectionDelay={sectionDelay + 0.05}
-        />
-      ))}
-    </div>
-  )
-}
-
-/* ── main component ──────────────────────────── */
 export default function Coursework() {
   const ref    = useRef(null)
   const inView = useInView(ref, { once: false, margin: '-60px' })
 
   return (
-    <section className="relative py-20 px-6 overflow-hidden" style={{ background: '#010407' }}>
-
-      {/* Subtle scanline overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 3px)',
-      }} />
+    <section
+      className="relative py-24 px-6 overflow-hidden"
+      style={{ background: '#050505' }}
+    >
+      {/* Ambient glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div style={{ position: 'absolute', top: '10%', left: '10%', width: 500, height: 300, background: 'radial-gradient(ellipse, rgba(109,40,217,0.07) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+        <div style={{ position: 'absolute', bottom: '10%', right: '10%', width: 400, height: 300, background: 'radial-gradient(ellipse, rgba(5,150,105,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+      </div>
 
       <div ref={ref} className="relative z-10 max-w-5xl mx-auto">
 
-        {/* ── Terminal window ─────────────────── */}
+        {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="rounded-2xl overflow-hidden"
-          style={{ border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 40px 80px rgba(0,0,0,0.6)' }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="mb-14 text-center"
         >
-          {/* Terminal title bar */}
-          <div className="flex items-center gap-2 px-5 py-3"
-            style={{ background: '#0a0e18', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-            <div style={{ width:9,height:9,borderRadius:'50%',background:'#ff5f56' }}/>
-            <div style={{ width:9,height:9,borderRadius:'50%',background:'#ffbd2e' }}/>
-            <div style={{ width:9,height:9,borderRadius:'50%',background:'#27c93f' }}/>
-            <span className="font-mono text-[10px] ml-3" style={{ color:'rgba(255,255,255,0.2)' }}>
-              academic_exposure.py — Penn State University
-            </span>
-            <div className="ml-auto flex items-center gap-1">
-              <div style={{ width:6,height:6,borderRadius:'50%',background:'#00ff9f',boxShadow:'0 0 6px #00ff9f',animation:'pulse 1.5s ease-in-out infinite' }} />
-              <span className="font-mono text-[9px]" style={{ color:'#00ff9f' }}>LIVE</span>
-            </div>
-          </div>
-
-          {/* ── Header panel ───────────────────── */}
-          <div className="px-5 py-4 border-b" style={{ background:'#050a12', borderColor:'rgba(255,255,255,0.05)' }}>
-            <div className="flex items-start justify-between flex-wrap gap-4">
-              <div>
-                <motion.p
-                  initial={{ opacity:0 }} animate={inView?{opacity:1}:{opacity:0}}
-                  transition={{ duration:0.5 }}
-                  className="font-mono text-[10px] uppercase tracking-[0.25em] mb-1"
-                  style={{ color:'rgba(255,255,255,0.2)' }}>
-                  FACTOR EXPOSURE REPORT
-                </motion.p>
-                <motion.h2
-                  initial={{ opacity:0, x:-20 }} animate={inView?{opacity:1,x:0}:{opacity:0,x:-20}}
-                  transition={{ duration:0.6, delay:0.05 }}
-                  className="font-mono text-lg font-bold"
-                  style={{ color:'#fff', letterSpacing:'0.05em' }}>
-                  KAVIT J. MANDALAYWALA
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity:0 }} animate={inView?{opacity:1}:{opacity:0}}
-                  transition={{ delay:0.1 }}
-                  className="font-mono text-[10px] mt-0.5"
-                  style={{ color:'rgba(255,255,255,0.25)' }}>
-                  B.S. Computer Science + Mathematics · Penn State · Class of 2028
-                </motion.p>
-              </div>
-
-              {/* Factor summary */}
-              <div className="flex gap-6">
-                {SECTIONS.map((sec, i) => (
-                  <motion.div key={sec.key}
-                    initial={{ opacity:0, y:10 }} animate={inView?{opacity:1,y:0}:{opacity:0,y:10}}
-                    transition={{ delay:0.1+i*0.07 }}>
-                    <div className="font-mono text-xl font-black" style={{ color:sec.color }}>
-                      {sec.courses.length}
-                    </div>
-                    <div className="font-mono text-[9px] uppercase tracking-widest" style={{ color:'rgba(255,255,255,0.2)' }}>
-                      {sec.key}
-                    </div>
-                  </motion.div>
-                ))}
-                <motion.div initial={{ opacity:0, y:10 }} animate={inView?{opacity:1,y:0}:{opacity:0,y:10}} transition={{ delay:0.31 }}>
-                  <div className="font-mono text-xl font-black" style={{ color:'rgba(255,255,255,0.5)' }}>{TOTAL}</div>
-                  <div className="font-mono text-[9px] uppercase tracking-widest" style={{ color:'rgba(255,255,255,0.2)' }}>TOTAL</div>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Exposure bars */}
-            <div className="flex items-center gap-3 mt-4">
-              {SECTIONS.map((sec, i) => (
-                <div key={sec.key} className="flex-1">
-                  <div className="flex justify-between mb-1">
-                    <span className="font-mono text-[9px]" style={{ color: sec.color }}>{sec.key}</span>
-                    <span className="font-mono text-[9px]" style={{ color:'rgba(255,255,255,0.2)' }}>
-                      {(sec.courses.length/TOTAL*100).toFixed(0)}%
-                    </span>
-                  </div>
-                  <div className="h-1 rounded-full" style={{ background:'rgba(255,255,255,0.06)' }}>
-                    <motion.div
-                      initial={{ width:0 }}
-                      animate={inView?{width:`${sec.courses.length/TOTAL*100}%`}:{width:0}}
-                      transition={{ duration:1, delay:0.3+i*0.1, ease:'easeOut' }}
-                      style={{ height:'100%', borderRadius:9999, background:sec.color,
-                               boxShadow:`0 0 8px ${sec.color}80` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Semester legend */}
-            <div className="flex items-center gap-5 mt-3">
-              <span className="font-mono text-[9px] uppercase tracking-widest" style={{ color:'rgba(255,255,255,0.15)' }}>TL</span>
-              {SEMS.map(s => (
-                <div key={s} className="flex items-center gap-1.5">
-                  <div style={{ width:6,height:6,borderRadius:'50%', background:SEM_C[s],
-                                boxShadow: s==='S26'?`0 0 6px ${SEM_C[s]}`:'none' }} />
-                  <span className="font-mono text-[9px]"
-                    style={{ color: s==='S26'?SEM_C[s]:s==='F26'?SEM_C[s]:'rgba(255,255,255,0.25)' }}>
-                    {SEM_L[s]}{s==='S26'?' ●':''}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Column headers ─────────────────── */}
-          <div className="flex items-center gap-3 px-4 py-2 border-b"
-            style={{ background:'#04090f', borderColor:'rgba(255,255,255,0.04)' }}>
-            <span className="font-mono text-[8px] uppercase tracking-widest w-4 text-right" style={{ color:'rgba(255,255,255,0.12)' }}>#</span>
-            <span className="font-mono text-[8px] uppercase tracking-widest w-24" style={{ color:'rgba(255,255,255,0.15)' }}>TICKER</span>
-            <span className="font-mono text-[8px] uppercase tracking-widest flex-1" style={{ color:'rgba(255,255,255,0.15)' }}>DESCRIPTION</span>
-            <span className="font-mono text-[8px] uppercase tracking-widest" style={{ color:'rgba(255,255,255,0.15)' }}>F24 S25 F25 S26 F26</span>
-            <span className="font-mono text-[8px] uppercase tracking-widest w-14 text-right" style={{ color:'rgba(255,255,255,0.15)' }}>TERM</span>
-          </div>
-
-          {/* ── Course sections ─────────────────── */}
-          <div style={{ background:'#020610' }}>
-            {SECTIONS.map((sec, i) => (
-              <Section key={sec.key} sec={sec} sectionIndex={i} inView={inView} />
-            ))}
-
-            {/* Footer row */}
-            <motion.div
-              initial={{ opacity:0 }} animate={inView?{opacity:1}:{opacity:0}}
-              transition={{ delay:1.2 }}
-              className="flex items-center gap-3 px-4 py-3 mt-1 border-t"
-              style={{ borderColor:'rgba(255,255,255,0.05)' }}>
-              <span className="font-mono text-[9px]" style={{ color:'rgba(255,255,255,0.15)' }}>
-                END OF REPORT · {TOTAL} POSITIONS · ACTIVE TERM: SPR 2026 ·
-              </span>
-              <motion.span
-                animate={{ opacity:[1,0,1] }} transition={{ duration:1, repeat:Infinity }}
-                className="font-mono text-[9px]" style={{ color:'#00ff9f' }}>
-                █
-              </motion.span>
-            </motion.div>
-          </div>
+          <p className="font-mono text-xs tracking-widest uppercase mb-4" style={{ color: 'rgba(167,139,250,0.55)' }}>
+            ✦ &nbsp; Penn State University &nbsp; ✦
+          </p>
+          <h2
+            style={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: 'clamp(2.4rem, 6vw, 4rem)',
+              fontWeight: 900,
+              color: '#fff',
+              lineHeight: 1,
+              letterSpacing: '-0.02em',
+              textShadow: '0 0 60px rgba(167,139,250,0.2)',
+            }}
+          >
+            Academic Edge
+          </h2>
+          <p
+            className="mt-4 font-sans text-sm max-w-xl mx-auto"
+            style={{ color: 'rgba(255,255,255,0.38)', lineHeight: 1.7 }}
+          >
+            The foundation behind my quantitative research, systems work, and market-focused projects.
+          </p>
         </motion.div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {CARDS.map((card, i) => (
+            <AcademicCard key={card.title} card={card} index={i} inView={inView} />
+          ))}
+        </div>
+
+        {/* Footer note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.7 }}
+          className="mt-10 text-center font-mono text-xs"
+          style={{ color: 'rgba(255,255,255,0.15)', letterSpacing: '0.08em' }}
+        >
+          B.S. Computer Science + Mathematics · Class of 2028
+        </motion.p>
 
       </div>
     </section>
